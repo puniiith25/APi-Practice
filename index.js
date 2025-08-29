@@ -1,23 +1,24 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-
-
+const express = require("express")
 const app = express();
+const port = 8000;
+app.use(express.json())
 
-
-// port number 
-const port =8000;
- 
-
-app.use(express.json());
-
-
-app.post('/',(req,res)=>{
-    const name = req.body.name;
-    console.log(name);
+app.get('/', (req, res) => {
+    res.status(200).send({
+        tshirt: '👕',
+        size: 's'
+    })
 });
+app.post('/tshirt', (req, res) => {
+    const { id } = req.body
+    const { name } = req.body
+    res.send({
+        id: id,
+        name: name
+    })
 
-// sever start 
-app.listen(port ,()=>{
-    console.log(`Api working in port:${port} `);
+})
+
+app.listen(port, () => {
+    console.log(`server runing on http://localhost:${port}`)
 })
